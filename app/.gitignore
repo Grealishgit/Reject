@@ -8,6 +8,13 @@ node_modules/
 dist/
 web-build/
 expo-env.d.ts
+.expo
+.eas.json
+*.expo-shared/
+
+
+# Android
+.android/
 
 # Native
 .kotlin/
