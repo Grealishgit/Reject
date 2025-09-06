@@ -91,9 +91,9 @@ const OverralStat = () => {
                     <Svg width={size} height={size} style={styles.svg}>
                         <Defs>
                             <LinearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <Stop offset="0%" stopColor="#F75270" stopOpacity="1" />
-                                <Stop offset="50%" stopColor="#F75270" stopOpacity="1" />
-                                <Stop offset="100%" stopColor="#F75270" stopOpacity="1" />
+                                <Stop offset="0%" stopColor="#4FC3F7" stopOpacity="1" />
+                                <Stop offset="50%" stopColor="#4FC3F7" stopOpacity="1" />
+                                <Stop offset="100%" stopColor="#4FC3F7" stopOpacity="1" />
                             </LinearGradient>
                         </Defs>
 
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 75,
-        backgroundColor: '#F75270',
+        backgroundColor: '#4FC3F7',
         zIndex: 2,
     },
     ripple2: {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 75,
-        backgroundColor: '#F75270',
+        backgroundColor: '#4FC3F7',
         zIndex: 2,
     },
     svg: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     percentageText: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#F75270',
+        color: '#4FC3F7',
         textAlign: 'center',
     },
     labelText: {

@@ -89,7 +89,7 @@ const AcceptRejectCircles = () => {
                 icon="close-circle"
                 percentage={75}
                 animatedValue={rejectProgress}
-                color="#E74C3C"
+                color="#F75270"
                 gradientId="redGrad"
             />
 
