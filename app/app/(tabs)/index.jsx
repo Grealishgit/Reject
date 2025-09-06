@@ -36,9 +36,7 @@ const styles = StyleSheet.create({
   overralContainer: {
     padding: 4,
     marginTop: 10,
-    height: '25%',
-
-
+    height: '22%',
   },
   circleContainer: {
     marginTop: 30,

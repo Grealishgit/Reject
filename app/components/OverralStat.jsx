@@ -1,6 +1,7 @@
 import { View, Text, Animated, StyleSheet } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -43,8 +44,15 @@ const OverralStat = () => {
     const circumference = 2 * Math.PI * radius;
 
     return (
-        <View style={styles.card}>
+        <View>
+            <View style={styles.headerContainer}>
+                <Text style={styles.title}>Overall Rejects</Text>
+
+                <MaterialCommunityIcons name='dots-horizontal' size={24} color='white' />
+            </View>
+
             <View style={styles.container}>
+
                 <View style={styles.circleContainer}>
                     <Animated.View style={[
                         styles.ripple,
@@ -117,7 +125,7 @@ const OverralStat = () => {
 
                     <View style={styles.centerText}>
                         <Text style={styles.percentageText}>75%</Text>
-                        <Text style={styles.labelText}>Overal Rejects</Text>
+                        <Text style={styles.labelText}>Rejects</Text>
                     </View>
                 </View>
             </View>
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#323230ff',
         height: '100%',
-        borderRadius: 10
+        borderRadius: 8
     },
     circleContainer: {
         position: 'relative',
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 75,
         backgroundColor: '#F75270',
-        zIndex: -1,
+        zIndex: 2,
     },
     svg: {
         position: 'absolute',
@@ -176,5 +184,16 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'center',
         marginTop: 2,
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        paddingBottom: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#fff',
     },
 });
