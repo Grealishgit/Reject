@@ -2,27 +2,33 @@ import { Image, Text, TouchableOpacity, View, StyleSheet, Dimensions, ScrollView
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 import { useRef, useState } from 'react'
+import simp1 from '../../assets/onboard/simp1.jpg'
+import simp2 from '../../assets/onboard/simp2.jpg'
+import mature from '../../assets/onboard/mature.png'
 
 const { width, height } = Dimensions.get('window');
 
 const onboardingData = [
     {
         id: 1,
-        title: "Track Your Rejections",
-        description: "Keep track of all your rejections and acceptances in one place. Learn from every experience and grow stronger.",
+        title: "Dont Be A Simp 💀",
+        description: "Track Your Rejections and keep track of all your rejections and acceptances in one place. Learn from every experience and grow stronger.",
         backgroundColor: '#E4004B', // Pure red
+        image: simp1,
     },
     {
         id: 2,
         title: "Analyze Your Progress",
         description: "Get insights into your acceptance and rejection patterns. Understand what works and what doesn't.",
         backgroundColor: '#FF6B8A', // Lighter red
+        image: simp2,
     },
     {
         id: 3,
         title: "Celebrate Success",
         description: "Every acceptance is a victory! Celebrate your successes and build confidence for future endeavors.",
-        backgroundColor: '#27AE60', // Green
+        backgroundColor: '#27AE60', // Green,
+        image: mature,
     }
 ];
 
