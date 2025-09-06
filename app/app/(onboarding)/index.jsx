@@ -1,10 +1,11 @@
-import { Image, Text, TouchableOpacity, View, StyleSheet, Dimensions, ScrollView } from 'react-native'
+import { Text, TouchableOpacity, View, StyleSheet, Dimensions, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 import { useRef, useState } from 'react'
 import simp1 from '../../assets/onboard/simp1.jpg'
 import simp2 from '../../assets/onboard/simp2.jpg'
 import mature from '../../assets/onboard/mature.png'
+import { Image } from 'expo-image'
 
 const { width, height } = Dimensions.get('window');
 
@@ -99,7 +100,7 @@ const Onboarding = () => {
                     >
                         <View style={styles.content}>
                             <View style={styles.iconContainer}>
-                                <Text style={styles.iconText}>📱</Text>
+                                <Image source={item.image} style={styles.image} />
                             </View>
                             <View style={styles.textContainer}>
                                 <Text style={styles.title}>{item.title}</Text>
@@ -193,11 +194,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 40,
     },
     iconContainer: {
-        width: width * 0.4,
-        height: height * 0.25,
+        width: width * 1,
+        height: height * 0.35,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 40,
+
+    },
+    image: {
+        width: '90%',
+        height: '80%',
+        contentFit: 'cover',
+        borderRadius: 8,
     },
     iconText: {
         fontSize: 100,
