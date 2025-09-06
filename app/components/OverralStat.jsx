@@ -1,4 +1,4 @@
-import { View, Text, Animated, StyleSheet } from 'react-native'
+import { View, Text, Animated, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -47,8 +47,10 @@ const OverralStat = () => {
         <View>
             <View style={styles.headerContainer}>
                 <Text style={styles.title}>Overall Rejects</Text>
+                <TouchableOpacity>
+                    <MaterialCommunityIcons name='dots-horizontal' size={24} color='white' />
+                </TouchableOpacity>
 
-                <MaterialCommunityIcons name='dots-horizontal' size={24} color='white' />
             </View>
 
             <View style={styles.container}>
