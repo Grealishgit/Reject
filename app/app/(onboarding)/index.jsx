@@ -170,8 +170,12 @@ const styles = StyleSheet.create({
         top: 50,
         right: 20,
         zIndex: 10,
-        paddingHorizontal: 15,
-        paddingVertical: 8,
+        paddingHorizontal: 30,
+        paddingVertical: 12,
+        borderWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.3)',
+        borderRadius: 25,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
     skipText: {
         color: 'white',
@@ -222,6 +226,7 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 18,
+        fontWeight: 'bold',
         color: 'rgba(255, 255, 255, 0.9)',
         textAlign: 'center',
         lineHeight: 26,
