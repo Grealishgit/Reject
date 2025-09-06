@@ -6,6 +6,7 @@ import simp1 from '../../assets/onboard/simp1.jpg'
 import simp2 from '../../assets/onboard/simp2.jpg'
 import mature from '../../assets/onboard/mature.png'
 import { Image } from 'expo-image'
+import { Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -137,12 +138,15 @@ const Onboarding = () => {
                         ]}
                         disabled={isFirstSlide}
                     >
+                        <Ionicons name="arrow-back-circle-outline" size={20} color="#fff" style={styles.iconRight} />
+
                         <Text style={[
                             styles.navButtonText,
                             isFirstSlide && styles.disabledText
                         ]}>
                             Previous
                         </Text>
+
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -152,6 +156,7 @@ const Onboarding = () => {
                         <Text style={styles.nextButtonText}>
                             {isLastSlide ? 'Get Started' : 'Next'}
                         </Text>
+                        <Ionicons name="arrow-forward-circle-outline" size={16} color="#333" style={styles.iconLeft} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -270,6 +275,8 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         minWidth: 120,
         alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     previousButton: {
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
@@ -289,8 +296,14 @@ const styles = StyleSheet.create({
     },
     nextButtonText: {
         color: '#333',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
+    },
+    iconRight: {
+        marginRight: 8,
+    },
+    iconLeft: {
+        marginLeft: 8,
     },
     disabledText: {
         color: 'rgba(255, 255, 255, 0.5)',
