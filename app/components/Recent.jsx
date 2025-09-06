@@ -29,7 +29,10 @@ const Recent = () => {
     };
 
     const DataBar = ({ item }) => (
-        <View style={styles.dataBar}>
+        <View style={[
+            styles.dataBar,
+            item.status === 'Rejected' ? styles.rejectedBar : styles.acceptedBar
+        ]}>
             <View style={styles.topRow}>
                 <Text style={styles.nameText}>{item.name}</Text>
                 <Text style={[
@@ -139,10 +142,16 @@ const styles = StyleSheet.create({
     },
     dataBar: {
         backgroundColor: '#2A2A2A',
-        borderRadius: 12,
+        borderRadius: 8,
         padding: 15,
-        borderLeftWidth: 4,
-        borderLeftColor: '#4FC3F7',
+    },
+    rejectedBar: {
+        borderLeftWidth: 2,
+        borderLeftColor: '#EB5757',
+    },
+    acceptedBar: {
+        borderRightWidth: 2,
+        borderRightColor: '#27AE60',
     },
     topRow: {
         flexDirection: 'row',
