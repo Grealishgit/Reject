@@ -3,13 +3,25 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
 const TopBar = () => {
+
+    //Function to get the current date
+    const getCurrentDate = () => {
+        const now = new Date();
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return now.toLocaleDateString('en-US', options);
+    };
+
     return (
         <View style={styles.container} >
             <View style={styles.containerBox}>
                 <View style={styles.timeCal}>
                     <Ionicons name='calendar-clear' size={20} color='white' />
                     <Text style={styles.timeText}>
-                        Jul 12, 2024
+                        {getCurrentDate()}
                     </Text>
                 </View>
                 <View style={styles.notificationContainer}>
