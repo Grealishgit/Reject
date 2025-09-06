@@ -6,11 +6,13 @@ import TopBar from '../../components/TopBar';
 import OverralStat from '../../components/OverralStat'
 import AcceptRejectCircles from '../../components/AcceptRejectCircles';
 import Recent from '../../components/Recent';
+import SafeScreen from '@/components/SafeScreen';
 
 
 export default function HomeScreen() {
   return (
-    <View style={styles.mainContainer}>
+    <SafeScreen>
+      <View style={styles.mainContainer}>
 
       <View>
         <TopBar />  
@@ -31,6 +33,8 @@ export default function HomeScreen() {
       </View>
 
     </View>
+    </SafeScreen>
+
   );
 }
 
