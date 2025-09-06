@@ -19,5 +19,13 @@
 "app/_layout.jsx",
 "app/(tabs)/notes.jsx",
 "app/(tabs)/index.jsx"
+,
+"components/ThemedView.jsx",
+"components/ThemedText.jsx",
+"components/ParallaxScrollView.jsx",
+"components/HelloWave.jsx",
+"components/HapticTab.jsx",
+"components/ExternalLink.jsx",
+"components/Collapsible.jsx"
 ]
 }
