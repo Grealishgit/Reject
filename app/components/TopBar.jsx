@@ -41,8 +41,7 @@ export default TopBar
 const styles = StyleSheet.create({
     container: {
         padding: 5,
-
-
+        marginBottom: 8
     },
     containerBox: {
         flexDirection: 'row',
