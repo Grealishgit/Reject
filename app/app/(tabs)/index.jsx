@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
   },
   recentContainer: {
     paddingTop: 100,
-    height: '34%',
+    height: '57%',
   },
 });

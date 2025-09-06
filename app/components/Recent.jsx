@@ -73,7 +73,7 @@ const Recent = () => {
                 ))}
             </View>
 
-            <View style={styles.scrollView}>
+
                 <ScrollView
                     style={styles.scrollContainer}
                     showsVerticalScrollIndicator={false}
@@ -83,7 +83,7 @@ const Recent = () => {
                         <DataBar key={index} item={item} />
                     ))}
                 </ScrollView>
-            </View>
+
         </View>
     )
 }
@@ -130,15 +130,12 @@ const styles = StyleSheet.create({
     scrollContainer: {
         flex: 1,
         marginBottom: 10,
-        maxHeight: 700,
     },
-    scrollView: {
-        flex: 1,
-        marginBottom: 10
-    },
+
     dataContainer: {
-        gap: 12,
-        paddingBottom: 50, // Add bottom padding for better scroll experience
+        gap: 8,
+        paddingBottom: 50,
+        marginBottom: 10,
     },
     dataBar: {
         backgroundColor: '#2A2A2A',
