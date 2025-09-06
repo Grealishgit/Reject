@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   overralContainer: {
     padding: 4,
     marginTop: 10,
-    height: '30%',
+    height: '25%',
 
 
   },

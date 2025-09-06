@@ -2,6 +2,8 @@ import { View, Text, Animated, StyleSheet } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
 const OverralStat = () => {
     const animatedValue = useRef(new Animated.Value(0)).current;
     const rippleAnim = useRef(new Animated.Value(0)).current;
@@ -41,62 +43,62 @@ const OverralStat = () => {
     const circumference = 2 * Math.PI * radius;
 
     return (
-        <View style={styles.container}>
-            <View style={styles.circleContainer}>
-                <Animated.View style={[
-                    styles.ripple,
-                    {
-                        transform: [{
-                            scale: rippleAnim.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: [0.8, 1.2]
+        <View style={styles.card}>
+            <View style={styles.container}>
+                <View style={styles.circleContainer}>
+                    <Animated.View style={[
+                        styles.ripple,
+                        {
+                            transform: [{
+                                scale: rippleAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [0.8, 1.2]
+                                })
+                            }],
+                            opacity: rippleAnim.interpolate({
+                                inputRange: [0, 0.5, 1],
+                                outputRange: [0.3, 0.1, 0]
                             })
-                        }],
-                        opacity: rippleAnim.interpolate({
-                            inputRange: [0, 0.5, 1],
-                            outputRange: [0.3, 0.1, 0]
-                        })
-                    }
-                ]} />
+                        }
+                    ]} />
 
-                <Animated.View style={[
-                    styles.ripple2,
-                    {
-                        transform: [{
-                            scale: rippleAnim.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: [1, 1.4]
+                    <Animated.View style={[
+                        styles.ripple2,
+                        {
+                            transform: [{
+                                scale: rippleAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [1, 1.4]
+                                })
+                            }],
+                            opacity: rippleAnim.interpolate({
+                                inputRange: [0, 0.3, 0.7, 1],
+                                outputRange: [0, 0.2, 0.1, 0]
                             })
-                        }],
-                        opacity: rippleAnim.interpolate({
-                            inputRange: [0, 0.3, 0.7, 1],
-                            outputRange: [0, 0.2, 0.1, 0]
-                        })
-                    }
-                ]} />
+                        }
+                    ]} />
 
-                <Svg width={size} height={size} style={styles.svg}>
-                    <Defs>
-                        <LinearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <Stop offset="0%" stopColor="#4FC3F7" stopOpacity="1" />
-                            <Stop offset="50%" stopColor="#29B6F6" stopOpacity="1" />
-                            <Stop offset="100%" stopColor="#03A9F4" stopOpacity="1" />
-                        </LinearGradient>
-                    </Defs>
+                    <Svg width={size} height={size} style={styles.svg}>
+                        <Defs>
+                            <LinearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <Stop offset="0%" stopColor="#F75270" stopOpacity="1" />
+                                <Stop offset="50%" stopColor="#F75270" stopOpacity="1" />
+                                <Stop offset="100%" stopColor="#F75270" stopOpacity="1" />
+                            </LinearGradient>
+                        </Defs>
 
-                    {/* Background circle */}
-                    <Circle
-                        cx={size / 2}
-                        cy={size / 2}
-                        r={radius}
-                        stroke="#E0E0E0"
-                        strokeWidth={strokeWidth}
-                        fill="none"
-                    />
-
-                    {/* Progress circle */}
-                    <Animated.View>
+                        {/* Background circle - light gray */}
                         <Circle
+                            cx={size / 2}
+                            cy={size / 2}
+                            r={radius}
+                            stroke="#7A7A73"
+                            strokeWidth={strokeWidth}
+                            fill="none"
+                        />
+
+                        {/* Progress circle - animated blue gradient */}
+                        <AnimatedCircle
                             cx={size / 2}
                             cy={size / 2}
                             r={radius}
@@ -111,18 +113,12 @@ const OverralStat = () => {
                             strokeLinecap="round"
                             transform={`rotate(-90 ${size / 2} ${size / 2})`}
                         />
-                    </Animated.View>
-                </Svg>
+                    </Svg>
 
-                <View style={styles.centerText}>
-                    <Animated.Text style={styles.percentageText}>
-                        {animatedValue.interpolate({
-                            inputRange: [0, 75],
-                            outputRange: [0, 75],
-                            extrapolate: 'clamp'
-                        })}%
-                    </Animated.Text>
-                    <Text style={styles.labelText}>Complete</Text>
+                    <View style={styles.centerText}>
+                        <Text style={styles.percentageText}>75%</Text>
+                        <Text style={styles.labelText}>Overal Rejects</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -150,7 +146,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 75,
-        backgroundColor: '#03A9F4',
+        backgroundColor: '#F75270',
         zIndex: 2,
     },
     ripple2: {
@@ -158,7 +154,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 75,
-        backgroundColor: '#29B6F6',
+        backgroundColor: '#F75270',
         zIndex: -1,
     },
     svg: {
@@ -172,12 +168,12 @@ const styles = StyleSheet.create({
     percentageText: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#03A9F4',
+        color: '#F75270',
         textAlign: 'center',
     },
     labelText: {
         fontSize: 14,
-        color: '#666',
+        color: '#fff',
         textAlign: 'center',
         marginTop: 2,
     },
