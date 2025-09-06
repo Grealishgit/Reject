@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import CircleProgress from '../../components/CircleProgress';
 import TopBar from '../../components/TopBar';
 import OverralStat from '../../components/OverralStat'
+import AcceptRejectCircles from '../../components/AcceptRejectCircles';
 
 
 export default function HomeScreen() {
@@ -21,7 +22,7 @@ export default function HomeScreen() {
 
 
       <View style={styles.circleContainer}>
-        <CircleProgress percentage={100} />
+        <AcceptRejectCircles />
       </View>
 
     </View>
@@ -39,6 +40,8 @@ const styles = StyleSheet.create({
     height: '22%',
   },
   circleContainer: {
-    marginTop: 30,
+    padding: 4,
+    paddingTop: 90,
+    height: '22%',
   }
 });

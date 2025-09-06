@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import Svg, { Circle, Text } from 'react-native-svg';
 
 const CircleProgress = ({ size = 120, strokeWidth = 10, percentage = 100 }) => {
@@ -27,7 +28,7 @@ const CircleProgress = ({ size = 120, strokeWidth = 10, percentage = 100 }) => {
                 strokeDashoffset={circumference - progress}
                 strokeLinecap="round"
             />
-            <Text
+            <Text style={styles.percentageText}
                 x={size / 2}
                 y={size / 2}
                 textAnchor="middle"
@@ -42,3 +43,11 @@ const CircleProgress = ({ size = 120, strokeWidth = 10, percentage = 100 }) => {
 };
 
 export default CircleProgress;
+
+const styles = StyleSheet.create({
+    percentageText: {
+        fontWeight: 'bold',
+        fontSize: 10,
+        color: 'red'
+    },
+});
