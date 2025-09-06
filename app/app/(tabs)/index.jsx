@@ -5,6 +5,7 @@ import CircleProgress from '../../components/CircleProgress';
 import TopBar from '../../components/TopBar';
 import OverralStat from '../../components/OverralStat'
 import AcceptRejectCircles from '../../components/AcceptRejectCircles';
+import Recent from '../../components/Recent';
 
 
 export default function HomeScreen() {
@@ -25,6 +26,10 @@ export default function HomeScreen() {
         <AcceptRejectCircles />
       </View>
 
+      <View style={styles.recentContainer}>
+        <Recent />
+      </View>
+
     </View>
   );
 }
@@ -43,5 +48,9 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingTop: 90,
     height: '22%',
-  }
+  },
+  recentContainer: {
+    paddingTop: 100,
+    height: '34%',
+  },
 });
