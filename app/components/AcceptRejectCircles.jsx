@@ -87,7 +87,7 @@ const AcceptRejectCircles = () => {
             <CircleCard
                 title="Rejects"
                 icon="close-circle"
-                percentage={70}
+                percentage={75}
                 animatedValue={rejectProgress}
                 color="#E74C3C"
                 gradientId="redGrad"
@@ -97,7 +97,7 @@ const AcceptRejectCircles = () => {
             <CircleCard
                 title="Acceptance"
                 icon="checkmark-circle"
-                percentage={30}
+                percentage={25}
                 animatedValue={acceptanceProgress}
                 color="#27AE60"
                 gradientId="greenGrad"
