@@ -10,16 +10,16 @@ const AcceptRejectCircles = () => {
     const rejectProgress = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        // Animate acceptance circle to 30%
+        // Animate acceptance circle to 25%
         Animated.timing(acceptanceProgress, {
-            toValue: 30,
+            toValue: 25,
             duration: 2000,
             useNativeDriver: false,
         }).start();
 
-        // Animate reject circle to 70%
+        // Animate reject circle to 75%
         Animated.timing(rejectProgress, {
-            toValue: 70,
+            toValue: 75,
             duration: 2000,
             useNativeDriver: false,
         }).start();
