@@ -7,7 +7,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, FontAwesome6, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -40,6 +40,14 @@ export default function TabLayout() {
         options={{
           title: 'Notes',
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="notes" color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="ai"
+        options={{
+          title: 'AI Analysis',
+          tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="brain" color={color} />,
         }}
       />
 
