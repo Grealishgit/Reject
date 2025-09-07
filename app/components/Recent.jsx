@@ -1,15 +1,68 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from '@react-navigation/native'
 
 const Recent = () => {
     const [activeFilter, setActiveFilter] = useState('Recent');
+    const [notes, setNotes] = useState([]);
 
-    const allData = [
-        { name: 'Eva', time: '2 min ago', status: 'Accepted', note: 'Am such a gentleman' },
-        { name: 'Shan', time: '10 min ago', status: 'Rejected', note: 'Not her type' },
-        { name: 'Amabell', time: '20 min ago', status: 'Accepted', note: 'I got the vibes' },
-        { name: 'Rita', time: '40 min ago', status: 'Rejected', note: 'Past Trauma' },
-    ];
+    useEffect(() => {
+        loadNotes();
+    }, []);
+
+    // Reload data when screen comes into focus
+    useFocusEffect(
+        React.useCallback(() => {
+            loadNotes();
+        }, [])
+    );
+
+    const loadNotes = async () => {
+        try {
+            const storedNotes = await AsyncStorage.getItem('encounter_notes');
+            if (storedNotes !== null) {
+                const parsedNotes = JSON.parse(storedNotes);
+                // Sort by timestamp (newest first)
+                const sortedNotes = parsedNotes.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                setNotes(sortedNotes);
+            } else {
+                setNotes([]);
+            }
+        } catch (error) {
+            console.error('Error loading notes:', error);
+            setNotes([]);
+        }
+    };
+
+    const getTimeAgo = (timestamp) => {
+        const now = new Date();
+        const noteTime = new Date(timestamp);
+        const diffInMinutes = Math.floor((now - noteTime) / (1000 * 60));
+
+        if (diffInMinutes < 1) return 'Just now';
+        if (diffInMinutes < 60) return `${diffInMinutes} min ago`;
+
+        const diffInHours = Math.floor(diffInMinutes / 60);
+        if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+
+        const diffInDays = Math.floor(diffInHours / 24);
+        if (diffInDays < 7) return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+
+        return noteTime.toLocaleDateString();
+    };
+
+    const formatNoteForDisplay = (note) => {
+        return {
+            name: note.name,
+            time: getTimeAgo(note.timestamp),
+            status: note.status === 'accepted' ? 'Accepted' : 'Rejected',
+            note: note.reason || note.notes || 'No additional notes',
+            location: note.location,
+            approach: note.approach,
+            confidence: note.confidence
+        };
+    };
 
     const buttons = [
         { id: 1, title: 'Recent' },
@@ -18,13 +71,15 @@ const Recent = () => {
     ];
 
     const getFilteredData = () => {
+        const formattedNotes = notes.map(formatNoteForDisplay);
+
         switch (activeFilter) {
             case 'Rejects':
-                return allData.filter(item => item.status === 'Rejected');
+                return formattedNotes.filter(item => item.status === 'Rejected');
             case 'Accepts':
-                return allData.filter(item => item.status === 'Accepted');
+                return formattedNotes.filter(item => item.status === 'Accepted');
             default:
-                return allData;
+                return formattedNotes;
         }
     };
 
@@ -42,6 +97,16 @@ const Recent = () => {
                     {item.status}
                 </Text>
             </View>
+
+            {/* Additional info row */}
+            {(item.location || item.approach || item.confidence) && (
+                <View style={styles.infoRow}>
+                    {item.location && <Text style={styles.infoText}>📍 {item.location}</Text>}
+                    {item.approach && <Text style={styles.infoText}>💬 {item.approach}</Text>}
+                    {item.confidence && <Text style={styles.infoText}>⭐ {item.confidence}/10</Text>}
+                </View>
+            )}
+
             <View style={styles.bottomRow}>
                 <Text style={styles.reasonText}>{item.note}</Text>
                 <Text style={styles.timeText}>{item.time}</Text>
@@ -74,15 +139,32 @@ const Recent = () => {
             </View>
 
 
-                <ScrollView
-                    style={styles.scrollContainer}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={styles.dataContainer}
-                >
-                    {getFilteredData().map((item, index) => (
+            <ScrollView
+                style={styles.scrollContainer}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.dataContainer}
+            >
+                {getFilteredData().length === 0 ? (
+                    <View style={styles.emptyContainer}>
+                        <Text style={styles.emptyText}>
+                            {notes.length === 0
+                                ? 'No encounters recorded yet.'
+                                : `No ${activeFilter.toLowerCase()} found.`
+                            }
+                        </Text>
+                        <Text style={styles.emptySubtext}>
+                            {notes.length === 0
+                                ? 'Start adding encounters in the Notes tab!'
+                                : 'Try a different filter or add more encounters.'
+                            }
+                        </Text>
+                    </View>
+                ) : (
+                    getFilteredData().map((item, index) => (
                         <DataBar key={index} item={item} />
-                    ))}
-                </ScrollView>
+                    ))
+                )}
+            </ScrollView>
 
         </View>
     )
@@ -179,6 +261,38 @@ const styles = StyleSheet.create({
     timeText: {
         fontSize: 12,
         color: '#8A8A8A',
+        fontStyle: 'italic',
+    },
+    infoRow: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginBottom: 8,
+        gap: 10,
+    },
+    infoText: {
+        fontSize: 12,
+        color: '#9CA3AF',
+        backgroundColor: '#374151',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 12,
+    },
+    emptyContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 40,
+    },
+    emptyText: {
+        fontSize: 16,
+        color: '#999',
+        textAlign: 'center',
+        marginBottom: 8,
+    },
+    emptySubtext: {
+        fontSize: 14,
+        color: '#666',
+        textAlign: 'center',
         fontStyle: 'italic',
     },
 });
