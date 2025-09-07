@@ -126,27 +126,64 @@ const Notes = () => {
         </TouchableOpacity>
       </View>
 
+
+      {notes.length > 0 &&
+        <View style={styles.statsContainer}>
+          <View style={[styles.statCard, { borderWidth: 1, borderColor: '#4FC3F7' }]}>
+            <Text style={styles.statLabel}>Total Notes</Text>
+            <View style={[styles.startValueContainer, { borderColor: '#4FC3F7' }]}>
+              <Text style={styles.statValue}>{notes.length}</Text>
+            </View>
+          </View>
+          <View style={[styles.statCard, { borderWidth: 1, borderColor: '#ed311cff' }]}>
+            <Text style={styles.statLabel}>Rejected</Text>
+            <View style={[styles.startValueContainer, { borderColor: '#ed311cff' }]}>
+              <Text style={styles.statValue}>{notes.filter(note => note.status === 'rejected').length}</Text>
+            </View>
+          </View>
+          <View style={[styles.statCard, { borderWidth: 1, borderColor: '#4CAF50' }]}>
+            <Text style={styles.statLabel}>Accepted</Text>
+            <View style={[styles.startValueContainer, { borderColor: '#4CAF50' }]}>
+              <Text style={styles.statValue}>{notes.filter(note => note.status === 'accepted').length}</Text>
+            </View>
+          </View>
+
+        </View>}
+
+      {/* Two cards for the average confidence level and approach stats */}
+      <View style={styles.statsContainer}>
+        <View style={[styles.statCard]}>
+          <Text style={styles.statLabel}>Average Confidence</Text>
+          <View >
+            <Text style={styles.statValue}>
+              {notes.length > 0 ? (notes.reduce((acc, note) => acc + (parseFloat(note.confidence) || 0), 0) / notes.length).toFixed(2) : 0}</Text>
+          </View>
+        </View>
+        <View style={[styles.statCard]}>
+          <Text style={styles.statLabel}>Most Common Approach</Text>
+          <View >
+            <Text style={styles.statValue}>{notes.length > 0 ? (() => {
+              const approachCounts = notes.reduce((acc, note) => {
+                if (note.approach) {
+                  acc[note.approach] = (acc[note.approach] || 0) + 1;
+                }
+                return acc;
+              }, {});
+              const mostCommon = Object.keys(approachCounts).reduce((a, b) => approachCounts[a] > approachCounts[b] ? a : b, '');
+              return mostCommon || 'N/A';
+            })() : 'N/A'}</Text>
+          </View>
+        </View>
+      </View>
+
       <ScrollView style={styles.notesContainer}>
         {notes.length === 0 ? (
           <Text style={styles.emptyText}>No encounters recorded yet. Tap + to add your first note!</Text>
         ) : (
-            <>
-              {/* Cards for stats */}
+          <>
+            {/* Cards for stats */}
 
-              <View style={styles.statsContainer}>
-                <View style={[styles.statCard, { borderWidth: 1, borderColor: '#4FC3F7' }]}>
-                  <Text style={styles.statLabel}>Total Notes</Text>
-                  <Text style={styles.statValue}>{notes.length}</Text>
-                </View>
-                <View style={[styles.statCard, { borderWidth: 1, borderColor: '#4CAF50' }]}>
-                  <Text style={styles.statLabel}>Accepted</Text>
-                  <Text style={styles.statValue}>{notes.filter(note => note.status === 'accepted').length}</Text>
-                </View>
-                <View style={[styles.statCard, { borderWidth: 1, borderColor: '#ed311cff' }]}>
-                  <Text style={styles.statLabel}>Rejected</Text>
-                  <Text style={styles.statValue}>{notes.filter(note => note.status === 'rejected').length}</Text>
-                </View>
-              </View>
+
 
               {notes.map((note) => (
                 <View key={note.id} style={[styles.noteCard, note.status === 'accepted' ? styles.acceptedCard : styles.rejectedCard]}>
@@ -517,11 +554,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   statsContainer: {
+    paddingLeft: 10,
+    paddingRight: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 15,
   },
   statCard: {
+    alignItems: 'center',
     backgroundColor: '#2c2c2c',
     borderRadius: 8,
     padding: 12,
@@ -540,4 +580,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  startValueContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    width: 30,
+    height: 30,
+    borderRadius: 25,
+    borderWidth: 1,
+
+
+  }
 })
