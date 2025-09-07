@@ -115,128 +115,131 @@ const Settings = () => {
     )
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Settings</Text>
+                <Ionicons name="settings" size={24} color="#fff" />
             </View>
+            <ScrollView style={styles.container}>
 
-            {/* App Preferences */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>App Preferences</Text>
+                {/* App Preferences */}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>App Preferences</Text>
 
-                <SettingItem
-                    title="Dark Mode"
-                    subtitle="Use dark theme throughout the app"
-                    value={settings.darkMode}
-                    onToggle={() => toggleSetting('darkMode')}
-                    icon="moon"
-                    color="#6C5CE7"
-                />
+                    <SettingItem
+                        title="Dark Mode"
+                        subtitle="Use dark theme throughout the app"
+                        value={settings.darkMode}
+                        onToggle={() => toggleSetting('darkMode')}
+                        icon="moon"
+                        color="#6C5CE7"
+                    />
 
-                <SettingItem
-                    title="Show Confidence in List"
-                    subtitle="Display confidence levels in notes list"
-                    value={settings.showConfidenceInList}
-                    onToggle={() => toggleSetting('showConfidenceInList')}
-                    icon="eye"
-                    color="#00B894"
-                />
+                    <SettingItem
+                        title="Show Confidence in List"
+                        subtitle="Display confidence levels in notes list"
+                        value={settings.showConfidenceInList}
+                        onToggle={() => toggleSetting('showConfidenceInList')}
+                        icon="eye"
+                        color="#00B894"
+                    />
 
-                <SettingItem
-                    title="Privacy Mode"
-                    subtitle="Hide sensitive information in app preview"
-                    value={settings.privacyMode}
-                    onToggle={() => toggleSetting('privacyMode')}
-                    icon="shield"
-                    color="#FDCB6E"
-                />
-            </View>
-
-            {/* Notifications */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Notifications</Text>
-
-                <SettingItem
-                    title="Enable Notifications"
-                    subtitle="Get reminders and updates"
-                    value={settings.notifications}
-                    onToggle={() => toggleSetting('notifications')}
-                    icon="notifications"
-                    color="#FF7675"
-                />
-
-                <SettingItem
-                    title="Daily Reminder"
-                    subtitle="Remind me to add new encounters"
-                    value={settings.reminderEnabled}
-                    onToggle={() => toggleSetting('reminderEnabled')}
-                    icon="time"
-                    color="#A29BFE"
-                />
-            </View>
-
-            {/* Data Management */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Data Management</Text>
-
-                <SettingItem
-                    title="Auto Backup"
-                    subtitle="Automatically backup your data"
-                    value={settings.autoBackup}
-                    onToggle={() => toggleSetting('autoBackup')}
-                    icon="cloud-upload"
-                    color="#74B9FF"
-                />
-
-                <ActionItem
-                    title="Export Data"
-                    subtitle="Save your encounters to file"
-                    onPress={exportData}
-                    icon="download"
-                    color="#00CEC9"
-                />
-
-                <ActionItem
-                    title="Clear All Data"
-                    subtitle="Permanently delete all encounters"
-                    onPress={clearAllData}
-                    icon="trash"
-                    color="#E17055"
-                    textColor="#E17055"
-                />
-            </View>
-
-            {/* Statistics */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>About</Text>
-
-                <View style={styles.infoItem}>
-                    <Text style={styles.infoLabel}>App Version</Text>
-                    <Text style={styles.infoValue}>1.0.0</Text>
+                    <SettingItem
+                        title="Privacy Mode"
+                        subtitle="Hide sensitive information in app preview"
+                        value={settings.privacyMode}
+                        onToggle={() => toggleSetting('privacyMode')}
+                        icon="shield"
+                        color="#FDCB6E"
+                    />
                 </View>
 
-                <View style={styles.infoItem}>
-                    <Text style={styles.infoLabel}>Developer</Text>
-                    <Text style={styles.infoValue}>HunterInc</Text>
+                {/* Notifications */}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Notifications</Text>
+
+                    <SettingItem
+                        title="Enable Notifications"
+                        subtitle="Get reminders and updates"
+                        value={settings.notifications}
+                        onToggle={() => toggleSetting('notifications')}
+                        icon="notifications"
+                        color="#FF7675"
+                    />
+
+                    <SettingItem
+                        title="Daily Reminder"
+                        subtitle="Remind me to add new encounters"
+                        value={settings.reminderEnabled}
+                        onToggle={() => toggleSetting('reminderEnabled')}
+                        icon="time"
+                        color="#A29BFE"
+                    />
                 </View>
 
-                <TouchableOpacity style={styles.infoItem}>
-                    <Text style={styles.infoLabel}>Privacy Policy</Text>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
-                </TouchableOpacity>
+                {/* Data Management */}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Data Management</Text>
 
-                <TouchableOpacity style={styles.infoItem}>
-                    <Text style={styles.infoLabel}>Terms of Service</Text>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
-                </TouchableOpacity>
-            </View>
+                    <SettingItem
+                        title="Auto Backup"
+                        subtitle="Automatically backup your data"
+                        value={settings.autoBackup}
+                        onToggle={() => toggleSetting('autoBackup')}
+                        icon="cloud-upload"
+                        color="#74B9FF"
+                    />
 
-            <View style={styles.footer}>
-                <Text style={styles.footerText}>
-                    Track your progress, learn from experiences, and improve your confidence.
-                </Text>
-            </View>
-        </ScrollView>
+                    <ActionItem
+                        title="Export Data"
+                        subtitle="Save your encounters to file"
+                        onPress={exportData}
+                        icon="download"
+                        color="#00CEC9"
+                    />
+
+                    <ActionItem
+                        title="Clear All Data"
+                        subtitle="Permanently delete all encounters"
+                        onPress={clearAllData}
+                        icon="trash"
+                        color="#E17055"
+                        textColor="#E17055"
+                    />
+                </View>
+
+                {/* Statistics */}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>About</Text>
+
+                    <View style={styles.infoItem}>
+                        <Text style={styles.infoLabel}>App Version</Text>
+                        <Text style={styles.infoValue}>1.0.0</Text>
+                    </View>
+
+                    <View style={styles.infoItem}>
+                        <Text style={styles.infoLabel}>Developer</Text>
+                        <Text style={styles.infoValue}>HunterInc</Text>
+                    </View>
+
+                    <TouchableOpacity style={styles.infoItem}>
+                        <Text style={styles.infoLabel}>Privacy Policy</Text>
+                        <Ionicons name="chevron-forward" size={20} color="#666" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.infoItem}>
+                        <Text style={styles.infoLabel}>Terms of Service</Text>
+                        <Ionicons name="chevron-forward" size={20} color="#666" />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.footer}>
+                    <Text style={styles.footerText}>
+                        Track your progress, learn from experiences, and improve your confidence.
+                    </Text>
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 
@@ -248,6 +251,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000',
     },
     header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         paddingTop: 50,
         paddingHorizontal: 20,
         paddingBottom: 20,
