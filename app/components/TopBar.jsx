@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, BlurView } from 'react-native'
 import React, { useState } from 'react'
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome6, Ionicons } from '@expo/vector-icons';
 
 const TopBar = () => {
 
@@ -23,17 +23,19 @@ const TopBar = () => {
     return (
         <View style={styles.container} >
             <View style={styles.containerBox}>
+                <View style={styles.notificationContainer} onPress={() => setIsOpen(true)}>
+                    {/* <View style={styles.notText}>
+                    </View> */}
+                    <FontAwesome6 name="hat-cowboy-side" size={25} color="#4FC3F7" />
+                    <Text style={styles.logoText}>ManSpan</Text>
+                </View>
                 <View style={styles.timeCal}>
                     <Ionicons name='calendar-clear' size={20} color='white' />
                     <Text style={styles.timeText}>
                         {getCurrentDate()}
                     </Text>
                 </View>
-                <TouchableOpacity style={styles.notificationContainer} onPress={() => setIsOpen(true)}>
-                    {/* <View style={styles.notText}>
-                    </View> */}
-                    <Ionicons name="add-circle-outline" size={25} color="white" />
-                </TouchableOpacity>
+
 
             </View>
 
@@ -191,6 +193,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 25,
+    },
+    logoText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#4FC3F7',
     },
     modalTitle: {
         fontSize: 22,
