@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   addButton: {
-    backgroundColor: '#E74C3C',
+    backgroundColor: '#4FC3F7',
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 8,
     width: '90%',
     maxHeight: '80%',
     overflow: 'hidden',
@@ -449,11 +449,12 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   saveButton: {
-    backgroundColor: '#E74C3C',
+    backgroundColor: '#4FC3F7',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 10,
+    marginBottom: 30,
   },
   saveButtonText: {
     color: '#fff',
