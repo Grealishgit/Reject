@@ -6,7 +6,7 @@ import simp1 from '../../assets/onboard/simp1.jpg'
 import simp2 from '../../assets/onboard/simp2.jpg'
 import mature from '../../assets/onboard/mature.png'
 import { Image } from 'expo-image'
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome6, Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -100,8 +100,12 @@ const Onboarding = () => {
                         style={[styles.slide, { backgroundColor: item.backgroundColor }]}
                     >
                         <View style={styles.content}>
-                            <View style={styles.iconContainer}>
+                            {/* <View style={styles.iconContainer}>
                                 <Image source={item.image} style={styles.image} />
+                            </View> */}
+                            <View style={styles.logoContainer}>
+                                <FontAwesome6 name="hat-cowboy-side" size={40} color="#fff" />
+                                <Text style={styles.logoText}>ManSpan</Text>
                             </View>
                             <View style={styles.textContainer}>
                                 <Text style={styles.title}>{item.title}</Text>
@@ -307,5 +311,16 @@ const styles = StyleSheet.create({
     },
     disabledText: {
         color: 'rgba(255, 255, 255, 0.5)',
+    },
+    logoContainer: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    logoText: {
+        fontSize: 50,
+        fontWeight: 'bold',
+        color: '#fff',
+        marginTop: -20,
     },
 });
