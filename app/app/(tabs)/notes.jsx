@@ -130,52 +130,72 @@ const Notes = () => {
         {notes.length === 0 ? (
           <Text style={styles.emptyText}>No encounters recorded yet. Tap + to add your first note!</Text>
         ) : (
-          notes.map((note) => (
-            <View key={note.id} style={[styles.noteCard, note.status === 'accepted' ? styles.acceptedCard : styles.rejectedCard]}>
-              <View style={styles.noteHeader}>
-                <Text style={styles.noteName}>{note.name}</Text>
-                <View style={styles.noteActions}>
-                  <TouchableOpacity onPress={() => editNote(note)} style={styles.actionButton}>
-                    <Ionicons name="pencil" size={18} color="#fff" />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => deleteNote(note.id)} style={styles.actionButton}>
-                    <Ionicons name="trash" size={18} color="#E74C3C" />
-                  </TouchableOpacity>
+            <>
+              {/* Cards for stats */}
+
+              <View style={styles.statsContainer}>
+                <View style={[styles.statCard, { borderWidth: 1, borderColor: '#4FC3F7' }]}>
+                  <Text style={styles.statLabel}>Total Notes</Text>
+                  <Text style={styles.statValue}>{notes.length}</Text>
+                </View>
+                <View style={[styles.statCard, { borderWidth: 1, borderColor: '#4CAF50' }]}>
+                  <Text style={styles.statLabel}>Accepted</Text>
+                  <Text style={styles.statValue}>{notes.filter(note => note.status === 'accepted').length}</Text>
+                </View>
+                <View style={[styles.statCard, { borderWidth: 1, borderColor: '#ed311cff' }]}>
+                  <Text style={styles.statLabel}>Rejected</Text>
+                  <Text style={styles.statValue}>{notes.filter(note => note.status === 'rejected').length}</Text>
                 </View>
               </View>
 
-              <View style={styles.statusContainer}>
-                <Text style={[styles.status, note.status === 'accepted' ? styles.acceptedStatus : styles.rejectedStatus]}>
-                  {note.status.charAt(0).toUpperCase() + note.status.slice(1)}
-                </Text>
-                <Text style={styles.timestamp}>
-                  {new Date(note.timestamp).toLocaleDateString()} {new Date(note.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </Text>
-              </View>
+              {notes.map((note) => (
+                <View key={note.id} style={[styles.noteCard, note.status === 'accepted' ? styles.acceptedCard : styles.rejectedCard]}>
+                  <View style={styles.noteHeader}>
+                    <Text style={styles.noteName}>{note.name}</Text>
+                    <View style={styles.noteActions}>
+                      <TouchableOpacity onPress={() => editNote(note)} style={styles.actionButton}>
+                        <Ionicons name="pencil" size={18} color="#fff" />
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => deleteNote(note.id)} style={styles.actionButton}>
+                        <Ionicons name="trash" size={18} color="#E74C3C" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
 
-              {/* Notes in button like display */}
-              <View style={styles.noteComponent}>
-                {note.location &&
-                  <View style={styles.noteDisplay}>
-                    <Text style={styles.detailLabel}>Location:</Text>
-                    <Text style={styles.detailLabel}>{note.location}</Text>
-                  </View>}
-                {note.approach &&
-                  <View style={styles.noteDisplay}>
-                    <Text style={styles.detailLabel}>Approach:</Text>
-                    <Text style={styles.detailLabel}>{note.approach}</Text>
-                  </View>}
-                {note.confidence &&
-                  <View style={styles.noteDisplay}>
-                    <Text style={styles.detailLabel}>Confidence:</Text>
-                    <Text style={styles.detailLabel}>{note.confidence}/10</Text>
-                  </View>}
-              </View>
+                  <View style={styles.statusContainer}>
+                    <Text style={[styles.status, note.status === 'accepted' ? styles.acceptedStatus : styles.rejectedStatus]}>
+                      {note.status.charAt(0).toUpperCase() + note.status.slice(1)}
+                    </Text>
+                    <Text style={styles.timestamp}>
+                      {new Date(note.timestamp).toLocaleDateString()} {new Date(note.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </Text>
+                  </View>
 
-              {note.reason && <Text style={styles.detail}><Text style={styles.detailLabel}>Reason:</Text> {note.reason}</Text>}
-              {note.notes && <Text style={styles.detail}><Text style={styles.detailLabel}>Notes:</Text> {note.notes}</Text>}
-            </View>
-          ))
+                  {/* Notes in button like display */}
+                  <View style={styles.noteComponent}>
+                    {note.location &&
+                      <View style={styles.noteDisplay}>
+                        <Text style={styles.detailLabel}>Location:</Text>
+                        <Text style={styles.detailLabel}>{note.location}</Text>
+                      </View>}
+                    {note.approach &&
+                      <View style={styles.noteDisplay}>
+                        <Text style={styles.detailLabel}>Approach:</Text>
+                        <Text style={styles.detailLabel}>{note.approach}</Text>
+                      </View>}
+                    {note.confidence &&
+                      <View style={styles.noteDisplay}>
+                        <Text style={styles.detailLabel}>Confidence:</Text>
+                        <Text style={styles.detailLabel}>{note.confidence}/10</Text>
+                      </View>}
+                  </View>
+
+                  {note.reason && <Text style={styles.detail}><Text style={styles.detailLabel}>Reason:</Text> {note.reason}</Text>}
+                  {note.notes && <Text style={styles.detail}><Text style={styles.detailLabel}>Notes:</Text> {note.notes}</Text>}
+                </View>
+              ))}
+
+            </>
         )}
       </ScrollView>
 
@@ -273,6 +293,7 @@ const Notes = () => {
           </View>
         </View>
       </Modal>
+
     </View>
   )
 }
@@ -494,5 +515,29 @@ const styles = StyleSheet.create({
     borderColor: '#4FC3F7',
     padding: 5,
     marginBottom: 15,
-  }
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+  },
+  statCard: {
+    backgroundColor: '#2c2c2c',
+    borderRadius: 8,
+    padding: 12,
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  statLabel: {
+    color: '#e0d5d5ff',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  statValue: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 })
