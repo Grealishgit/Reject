@@ -153,9 +153,25 @@ const Notes = () => {
                 </Text>
               </View>
 
-              {note.location && <Text style={styles.detail}><Text style={styles.detailLabel}>Location:</Text> {note.location}</Text>}
-              {note.approach && <Text style={styles.detail}><Text style={styles.detailLabel}>Approach:</Text> {note.approach}</Text>}
-              {note.confidence && <Text style={styles.detail}><Text style={styles.detailLabel}>Confidence:</Text> {note.confidence}/10</Text>}
+              {/* Notes in button like display */}
+              <View style={styles.noteComponent}>
+                {note.location &&
+                  <View style={styles.noteDisplay}>
+                    <Text style={styles.detailLabel}>Location:</Text>
+                    <Text style={styles.detailLabel}>{note.location}</Text>
+                  </View>}
+                {note.approach &&
+                  <View style={styles.noteDisplay}>
+                    <Text style={styles.detailLabel}>Approach:</Text>
+                    <Text style={styles.detailLabel}>{note.approach}</Text>
+                  </View>}
+                {note.confidence &&
+                  <View style={styles.noteDisplay}>
+                    <Text style={styles.detailLabel}>Confidence:</Text>
+                    <Text style={styles.detailLabel}>{note.confidence}/10</Text>
+                  </View>}
+              </View>
+
               {note.reason && <Text style={styles.detail}><Text style={styles.detailLabel}>Reason:</Text> {note.reason}</Text>}
               {note.notes && <Text style={styles.detail}><Text style={styles.detailLabel}>Notes:</Text> {note.notes}</Text>}
             </View>
@@ -302,16 +318,18 @@ const styles = StyleSheet.create({
   },
   noteCard: {
     backgroundColor: '#1a1a1a',
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 15,
     marginBottom: 15,
-    borderLeftWidth: 4,
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+
   },
   acceptedCard: {
-    borderLeftColor: '#27AE60',
+    borderRightColor: '#27AE60',
   },
   rejectedCard: {
-    borderLeftColor: '#E74C3C',
+    borderLeftColor: '#ed311cff',
   },
   noteHeader: {
     flexDirection: 'row',
@@ -366,6 +384,7 @@ const styles = StyleSheet.create({
   detailLabel: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize: 14,
   },
   // Modal Styles
   modalOverlay: {
@@ -461,4 +480,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  noteComponent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  noteDisplay: {
+    flexDirection: 'row',
+    gap: 2,
+    backgroundColor: '#1a1a1a',
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: '#d71111ff',
+    padding: 5,
+    marginBottom: 15,
+  }
 })
